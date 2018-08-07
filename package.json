@@ -1,0 +1,26 @@
+{
+  "name": "react-native-time-modal-picker",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "expo": "^29.0.0",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.8",
+    "@types/react-native": "^0.56.6",
+    "react-native-scripts-ts": "^1.15.0",
+    "react-native-typescript-transformer": "^1.2.10",
+    "typescript": "^3.0.1"
+  },
+  "main": "./node_modules/react-native-scripts-ts/build/bin/crna-entry.js",
+  "scripts": {
+    "start": "react-native-scripts-ts start",
+    "eject": "react-native-scripts-ts eject",
+    "android": "react-native-scripts-ts android",
+    "ios": "react-native-scripts-ts ios",
+    "build-library": "cd src && tsc && cp package.json ../build/dist/ && Echo Build completed!",
+    "publish-library": "cd build/dist && npm publish && echo Package published!"
+  }
+}
