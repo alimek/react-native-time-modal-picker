@@ -21,7 +21,7 @@
     "eject": "react-native-scripts-ts eject",
     "android": "react-native-scripts-ts android",
     "ios": "react-native-scripts-ts ios",
-    "build-library": "cd src && tsc && cp package.json ../build/dist/ && Echo Build completed!",
+    "build-library": "cd src && cp package.json ../build/dist/ && tsc && Echo Build completed!",
     "publish-library": "cd build/dist && npm publish && echo Package published!"
   }
 }
