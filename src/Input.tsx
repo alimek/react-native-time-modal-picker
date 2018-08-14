@@ -1,13 +1,25 @@
 import * as React from 'react';
 import { TouchableWithoutFeedback, View, Text, ViewStyle } from 'react-native';
 
-import styles from './styles';
-import ModalPicker from './Modal';
+import styles, { TimePickerStyle } from './styles';
+// @ts-ignore
+import Modal from './Modal';
 
 interface ParentProps {
   value: number;
   onValueChanged: (value: number) => void;
   containerStyle?: ViewStyle;
+  style?: TimePickerStyle;
+  modalHeight?: number;
+  backTitle?: string;
+  saveTitle?: string;
+  animateDuration?: number;
+  enabledHours?: boolean;
+  enabledMinutes?: boolean;
+  enabledSeconds?: boolean;
+  hoursTitle?: string;
+  minutesTitle?: string;
+  secondsTitle?: string;
 }
 
 interface State {
@@ -17,6 +29,12 @@ interface State {
 type Props = ParentProps;
 
 class Input extends React.Component<Props, State> {
+  public static defaultProps = {
+    isOpen: false,
+    enabledSeconds: true,
+    enabledMinutes: true,
+  };
+
   state = {
     isOpen: false,
   };
@@ -38,6 +56,17 @@ class Input extends React.Component<Props, State> {
     const {
       containerStyle,
       value,
+      enabledMinutes,
+      enabledSeconds,
+      enabledHours,
+      modalHeight,
+      backTitle,
+      saveTitle,
+      animateDuration,
+      hoursTitle,
+      minutesTitle,
+      secondsTitle,
+      style,
     } = this.props;
     const { isOpen } = this.state;
 
@@ -60,13 +89,22 @@ class Input extends React.Component<Props, State> {
             </Text>
           </View>
         </TouchableWithoutFeedback>
-        <ModalPicker
+        <Modal
           isOpen={isOpen}
           onPressCancel={() => this.setState({ isOpen: !isOpen })}
           onPressSave={this.onChanged}
           value={value}
-          enabledMinutes
-          enabledSeconds
+          enabledMinutes={enabledMinutes}
+          enabledSeconds={enabledSeconds}
+          enabledHours={enabledHours}
+          modalHeight={modalHeight}
+          backTitle={backTitle}
+          saveTitle={saveTitle}
+          animateDuration={animateDuration}
+          hoursTitle={hoursTitle}
+          minutesTitle={minutesTitle}
+          secondsTitle={secondsTitle}
+          style={style}
         />
       </React.Fragment>
     );

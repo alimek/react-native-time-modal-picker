@@ -1,29 +1,12 @@
 import * as React from 'react';
 import { Modal, Animated, View, TouchableOpacity, Text, Picker } from 'react-native';
 
-import styles, { HEIGHT, TimePickerStyle } from './styles';
+import styles, { HEIGHT } from './styles';
+import { ModalProps } from './typings';
 
 const ANIMATE_DURATION = 200;
 
-interface ParentProps {
-  isOpen: boolean;
-  style?: TimePickerStyle;
-  modalHeight?: number;
-  backTitle?: string;
-  saveTitle?: string;
-  onPressCancel: Function;
-  onPressSave: (value: number) => void;
-  animateDuration?: number;
-  value: number;
-  enabledHours?: boolean;
-  enabledMinutes?: boolean;
-  enabledSeconds?: boolean;
-  hoursTitle?: string;
-  minutesTitle?: string;
-  secondsTitle?: string;
-}
-
-interface State {
+export interface State {
   openAnimation: Animated.Value;
   visible: boolean;
   currentValue: number;
@@ -32,9 +15,7 @@ interface State {
   secondValue: number;
 }
 
-type Props = ParentProps;
-
-class PickerModal extends React.Component<Props, State> {
+class PickerModal extends React.Component<ModalProps, State> {
   public static defaultProps = {
     backTitle: 'Cancel',
     saveTitle: 'Save',
@@ -47,7 +28,7 @@ class PickerModal extends React.Component<Props, State> {
     secondsTitle: 'Second',
   };
 
-  constructor(props: Props) {
+  constructor(props: ModalProps) {
     super(props);
 
     this.state = {
@@ -60,7 +41,7 @@ class PickerModal extends React.Component<Props, State> {
     };
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps: ModalProps, prevState: State) {
     const { isOpen, value } = this.props;
     const { currentValue } = this.state;
 
@@ -74,7 +55,7 @@ class PickerModal extends React.Component<Props, State> {
     }
   }
 
-  shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
+  shouldComponentUpdate(nextProps: ModalProps, nextState: State): boolean {
     const { isOpen, value } = this.props;
     const { visible, currentValue } = this.state;
 
@@ -151,10 +132,14 @@ class PickerModal extends React.Component<Props, State> {
     const { openAnimation, visible, hourValue, minuteValue, secondValue } = this.state;
     const height = modalHeight || HEIGHT;
 
+    const array60 = new Array(60).fill(1);
+    const array24 = new Array(24).fill(1);
+
     return (
       <Modal
         transparent
         visible={visible}
+        onRequestClose={this.cancel}
       >
         <View
           style={[
@@ -228,51 +213,60 @@ class PickerModal extends React.Component<Props, State> {
                 enabledHours ?
                   <View style={mergedStyles.pickerContainer}>
                     <Text style={mergedStyles.pickerHeader}>{hoursTitle}</Text>
-                    <Picker
-                      style={mergedStyles.picker}
-                      onValueChange={this.onChangeHour}
-                      selectedValue={hourValue}
-                    >
-                      {
-                        Array.from(Array(30).keys()).map(value => (
-                          <Picker.Item key={value.toString()} value={value} label={value.toString()}/>
-                        ))
-                      }
-                    </Picker>
+                    <View style={mergedStyles.androidPickerWrapper}>
+                      <Picker
+                        style={mergedStyles.picker}
+                        onValueChange={this.onChangeHour}
+                        selectedValue={hourValue}
+                        mode="dropdown"
+                      >
+                        {
+                          array24.map((value, index) => (
+                            <Picker.Item key={index.toString()} value={index} label={index.toString()}/>
+                          ))
+                        }
+                      </Picker>
+                    </View>
                   </View> : null
               }
               {
                 enabledMinutes ?
                   <View style={mergedStyles.pickerContainer}>
                     <Text style={mergedStyles.pickerHeader}>{minutesTitle}</Text>
-                    <Picker
-                      style={mergedStyles.picker}
-                      onValueChange={this.onMinuteChanged}
-                      selectedValue={minuteValue}
-                    >
-                      {
-                        Array.from(Array(60).keys()).map(value => (
-                          <Picker.Item key={value.toString()} value={value} label={value.toString()}/>
-                        ))
-                      }
-                    </Picker>
+                    <View style={mergedStyles.androidPickerWrapper}>
+                      <Picker
+                        style={mergedStyles.picker}
+                        onValueChange={this.onMinuteChanged}
+                        selectedValue={minuteValue}
+                        mode="dropdown"
+                      >
+                        {
+                          array60.map((value, index) => (
+                            <Picker.Item key={index.toString()} value={index} label={index.toString()}/>
+                          ))
+                        }
+                      </Picker>
+                    </View>
                   </View> : null
               }
               {
                 enabledSeconds ?
                   <View style={mergedStyles.pickerContainer}>
                     <Text style={mergedStyles.pickerHeader}>{secondsTitle}</Text>
-                    <Picker
-                      style={mergedStyles.picker}
-                      selectedValue={secondValue}
-                      onValueChange={this.onSecondChanged}
-                    >
-                      {
-                        Array.from(Array(60).keys()).map((value) => (
-                          <Picker.Item key={value.toString()} value={value} label={value.toString()}/>
-                        ))
-                      }
-                    </Picker>
+                    <View style={mergedStyles.androidPickerWrapper}>
+                      <Picker
+                        style={mergedStyles.picker}
+                        selectedValue={secondValue}
+                        onValueChange={this.onSecondChanged}
+                        mode="dropdown"
+                      >
+                        {
+                          array60.map((value, index) => (
+                            <Picker.Item key={index.toString()} value={index} label={index.toString()}/>
+                          ))
+                        }
+                      </Picker>
+                    </View>
                   </View> : null
               }
             </View>

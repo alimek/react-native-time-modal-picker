@@ -1,6 +1,9 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
-export const HEIGHT = 250;
+export const HEIGHT = Platform.select({
+  ios: 250,
+  android: 130,
+});
 
 export interface TimePickerStyle {
   container?: ViewStyle;
@@ -18,6 +21,7 @@ export interface TimePickerStyle {
   picker?: ViewStyle;
   pickerContainer?: ViewStyle;
   pickerHeader?: TextStyle;
+  androidPickerWrapper?: TextStyle;
 }
 
 export default StyleSheet.create({
@@ -73,8 +77,17 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  picker: {
-    flex: 1,
+  picker: Platform.select({
+    ios: {
+      flex: 1,
+    },
+    android: {
+      width: '80%',
+      height: 80,
+    },
+  }),
+  androidPickerWrapper: {
+    marginLeft: '25%',
   },
   pickerContainer: {
     flex: 1,

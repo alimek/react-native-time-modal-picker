@@ -1,14 +1,19 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import TimePicker from './src/index';
 
 interface State {
   value: number;
 }
 
+
 export default class App extends React.Component<any, State> {
   state = {
     value: 1230,
+  };
+
+  onValueChanged = (value: number): void => {
+    this.setState({ value });
   };
 
   render() {
@@ -16,7 +21,7 @@ export default class App extends React.Component<any, State> {
       <View style={styles.container}>
         <TimePicker
           value={this.state.value}
-          onValueChanged={value => this.setState({ value })}
+          onValueChanged={this.onValueChanged}
         />
       </View>
     );
