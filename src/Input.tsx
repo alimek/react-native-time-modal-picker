@@ -4,6 +4,7 @@ import { TouchableWithoutFeedback, View, Text, ViewStyle } from 'react-native';
 import styles, { TimePickerStyle } from './styles';
 // @ts-ignore
 import Modal from './Modal';
+import { mergeStyles } from './utils';
 
 interface ParentProps {
   value: number;
@@ -79,12 +80,9 @@ class Input extends React.Component<Props, State> {
           onPress={this.openPicker}
         >
           <View
-            style={[
-              styles.container,
-              containerStyle,
-            ]}
+            style={mergeStyles(styles, style || {}, 'container')}
           >
-            <Text>
+            <Text style={mergeStyles(styles, style || {}, 'containerText')}>
               {`${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`}
             </Text>
           </View>

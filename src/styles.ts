@@ -7,6 +7,7 @@ export const HEIGHT = Platform.select({
 
 export interface TimePickerStyle {
   container?: ViewStyle;
+  containerText?: TextStyle;
   modalContainer?: ViewStyle;
   modalBackgroundContainer?: ViewStyle;
   background?: ViewStyle;
@@ -30,6 +31,9 @@ export default StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: 'black',
+  },
+  containerStyle: {
+    color: 'black',
   },
   background: {
     backgroundColor: 'black',

@@ -1,6 +1,6 @@
 {
   "name": "react-native-time-modal-picker",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
     "expo": "^29.0.0",
@@ -22,6 +22,7 @@
     "android": "react-native-scripts-ts android",
     "ios": "react-native-scripts-ts ios",
     "build-library": "cd src && cp package.json ../build/dist/ && tsc && Echo Build completed!",
-    "publish-library": "cd build/dist && npm publish && echo Package published!"
+    "publish-library": "cd build/dist && npm publish && echo Package published!",
+    "lib:publish": "yarn build-library && publish-library"
   }
 }
