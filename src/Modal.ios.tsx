@@ -3,6 +3,7 @@ import { Modal, Animated, View, TouchableOpacity, Text, Picker } from 'react-nat
 
 import styles, { HEIGHT } from './styles';
 import { ModalProps } from './typings';
+import { mergeStyles } from './utils';
 
 const ANIMATE_DURATION = 200;
 
@@ -128,7 +129,6 @@ class PickerModal extends React.Component<ModalProps, State> {
       secondsTitle,
       minutesTitle,
     } = this.props;
-    const mergedStyles = { ...styles, ...style };
     const { openAnimation, visible, hourValue, minuteValue, secondValue } = this.state;
     const height = modalHeight || HEIGHT;
 
@@ -142,7 +142,7 @@ class PickerModal extends React.Component<ModalProps, State> {
       >
         <View
           style={[
-            mergedStyles.modalBackgroundContainer,
+            mergeStyles(styles, style, 'modalBackgroundContainer')
           ]}
         >
           <Animated.View style={[
@@ -152,7 +152,7 @@ class PickerModal extends React.Component<ModalProps, State> {
                 outputRange: [0, 0.2]
               })
             },
-            mergedStyles.background,
+            mergeStyles(styles, style, 'background'),
           ]}/>
           <Animated.View
             style={[
@@ -163,28 +163,29 @@ class PickerModal extends React.Component<ModalProps, State> {
                       inputRange: [0, 1],
                       outputRange: [2 * height, 0],
                     }),
+
                   }
                 ],
               },
-              mergedStyles.modalContainer,
+              mergeStyles(styles, style, 'modalContainer'),
             ]}
           >
             <View
               style={[
-                mergedStyles.modalHeaderContainer,
+                mergeStyles(styles, style, 'modalHeaderContainer'),
               ]}
             >
               <TouchableOpacity
                 onPress={this.cancel}
                 style={[
-                  mergedStyles.modalHeaderButton,
-                  mergedStyles.modalHeaderButtonCancel,
+                  mergeStyles(styles, style, 'modalHeaderButton'),
+                  mergeStyles(styles, style, 'modalHeaderButtonCancel'),
                 ]}
               >
                 <Text
                   style={[
-                    mergedStyles.modalHeaderButtonText,
-                    mergedStyles.modalHeaderButtonTextCancel,
+                    mergeStyles(styles, style, 'modalHeaderButtonText'),
+                    mergeStyles(styles, style, 'modalHeaderButtonTextCancel'),
                   ]}
                 >
                   {backTitle}
@@ -193,27 +194,27 @@ class PickerModal extends React.Component<ModalProps, State> {
               <TouchableOpacity
                 onPress={this.save}
                 style={[
-                  mergedStyles.modalHeaderButton,
-                  mergedStyles.modalHeaderButtonSave,
+                  mergeStyles(styles, style, 'modalHeaderButton'),
+                  mergeStyles(styles, style, 'modalHeaderButtonSave'),
                 ]}
               >
                 <Text
                   style={[
-                    mergedStyles.modalHeaderButtonText,
-                    mergedStyles.modalHeaderButtonTextSave,
+                    mergeStyles(styles, style, 'modalHeaderButtonText'),
+                    mergeStyles(styles, style, 'modalHeaderButtonTextSave'),
                   ]}
                 >
                   {saveTitle}
                 </Text>
               </TouchableOpacity>
             </View>
-            <View style={mergedStyles.modalContentContainer}>
+            <View style={mergeStyles(styles, style, 'modalContentContainer')}>
               {
                 enabledHours ?
-                  <View style={mergedStyles.pickerContainer}>
-                    <Text style={mergedStyles.pickerHeader}>{hoursTitle}</Text>
+                  <View style={mergeStyles(styles, style, 'pickerContainer')}>
+                    <Text style={mergeStyles(styles, style, 'pickerHeader')}>{hoursTitle}</Text>
                     <Picker
-                      style={mergedStyles.picker}
+                      style={mergeStyles(styles, style, 'picker')}
                       onValueChange={this.onChangeHour}
                       selectedValue={hourValue}
                     >
@@ -227,10 +228,10 @@ class PickerModal extends React.Component<ModalProps, State> {
               }
               {
                 enabledMinutes ?
-                  <View style={mergedStyles.pickerContainer}>
-                    <Text style={mergedStyles.pickerHeader}>{minutesTitle}</Text>
+                  <View style={mergeStyles(styles, style, 'pickerContainer')}>
+                    <Text style={mergeStyles(styles, style, 'pickerHeader')}>{minutesTitle}</Text>
                     <Picker
-                      style={mergedStyles.picker}
+                      style={mergeStyles(styles, style, 'picker')}
                       onValueChange={this.onMinuteChanged}
                       selectedValue={minuteValue}
                     >
@@ -244,10 +245,10 @@ class PickerModal extends React.Component<ModalProps, State> {
               }
               {
                 enabledSeconds ?
-                  <View style={mergedStyles.pickerContainer}>
-                    <Text style={mergedStyles.pickerHeader}>{secondsTitle}</Text>
+                  <View style={mergeStyles(styles, style, 'pickerContainer')}>
+                    <Text style={mergeStyles(styles, style, 'pickerHeader')}>{secondsTitle}</Text>
                     <Picker
-                      style={mergedStyles.picker}
+                      style={mergeStyles(styles, style, 'picker')}
                       selectedValue={secondValue}
                       onValueChange={this.onSecondChanged}
                       mode="dropdown"

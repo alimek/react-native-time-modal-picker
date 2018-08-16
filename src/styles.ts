@@ -22,6 +22,7 @@ export interface TimePickerStyle {
   pickerContainer?: ViewStyle;
   pickerHeader?: TextStyle;
   androidPickerWrapper?: TextStyle;
+  [key: string]: any;
 }
 
 export default StyleSheet.create({
