@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TouchableWithoutFeedback, View, Text, ViewStyle } from 'react-native';
+import { TouchableWithoutFeedback, View, Text } from 'react-native';
 
 import styles, { TimePickerStyle } from './styles';
 // @ts-ignore
@@ -9,7 +9,6 @@ import { mergeStyles } from './utils';
 interface ParentProps {
   value: number;
   onValueChanged: (value: number) => void;
-  containerStyle?: ViewStyle;
   style?: TimePickerStyle;
   modalHeight?: number;
   backTitle?: string;
@@ -55,7 +54,6 @@ class Input extends React.Component<Props, State> {
 
   render() {
     const {
-      containerStyle,
       value,
       enabledMinutes,
       enabledSeconds,

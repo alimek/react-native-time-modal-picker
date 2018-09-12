@@ -1,5 +1,4 @@
 import { TimePickerStyle } from './styles';
-import { Animated } from 'react-native';
 
 export interface ParentProps {
   isOpen: boolean;
