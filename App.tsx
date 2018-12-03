@@ -22,6 +22,7 @@ export default class App extends React.Component<any, State> {
         <TimePicker
           value={this.state.value}
           onValueChanged={this.onValueChanged}
+          minutesMaxValue={99}
         />
       </View>
     );

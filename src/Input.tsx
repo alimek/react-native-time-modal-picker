@@ -20,6 +20,8 @@ interface ParentProps {
   hoursTitle?: string;
   minutesTitle?: string;
   secondsTitle?: string;
+  minutesMaxValue?: number;
+  hoursMaxValue?: number;
 }
 
 interface State {
@@ -47,7 +49,6 @@ class Input extends React.Component<Props, State> {
     const { onValueChanged } = this.props;
     const { isOpen } = this.state;
 
-    console.log(value);
     this.setState({ isOpen: !isOpen });
     onValueChanged && onValueChanged(value);
   };
@@ -66,6 +67,8 @@ class Input extends React.Component<Props, State> {
       minutesTitle,
       secondsTitle,
       style,
+      minutesMaxValue,
+      hoursMaxValue,
     } = this.props;
     const { isOpen } = this.state;
 
@@ -101,6 +104,8 @@ class Input extends React.Component<Props, State> {
           minutesTitle={minutesTitle}
           secondsTitle={secondsTitle}
           style={style}
+          minutesMaxValue={minutesMaxValue}
+          hoursMaxValue={hoursMaxValue}
         />
       </React.Fragment>
     );

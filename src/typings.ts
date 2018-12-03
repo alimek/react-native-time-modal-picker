@@ -16,6 +16,8 @@ export interface ParentProps {
   hoursTitle?: string;
   minutesTitle?: string;
   secondsTitle?: string;
+  minutesMaxValue: number;
+  hoursMaxValue: number;
 }
 
 export type ModalProps = ParentProps;

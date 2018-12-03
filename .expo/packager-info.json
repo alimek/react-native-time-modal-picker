@@ -1,5 +1,8 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 64965,
+  "expoServerNgrokUrl": "https://rz-suj.alimek.react-native-time-modal-picker.exp.direct",
+  "packagerNgrokUrl": "https://packager.rz-suj.alimek.react-native-time-modal-picker.exp.direct",
+  "ngrokPid": 64977
 }

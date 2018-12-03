@@ -26,6 +26,8 @@ class PickerModal extends React.Component<ModalProps, State> {
     hoursTitle: 'Hour',
     minutesTitle: 'Minute',
     secondsTitle: 'Second',
+    minutesMaxValue: 59,
+    hoursMaxValue: 23,
   };
 
   constructor(props: ModalProps) {
@@ -88,9 +90,6 @@ class PickerModal extends React.Component<ModalProps, State> {
   save = () => {
     const { onPressSave } = this.props;
     const { currentValue } = this.state;
-    console.log({
-      currentValue,
-    });
     onPressSave(currentValue);
   };
 
@@ -127,13 +126,16 @@ class PickerModal extends React.Component<ModalProps, State> {
       hoursTitle,
       secondsTitle,
       minutesTitle,
+      minutesMaxValue,
+      hoursMaxValue,
     } = this.props;
     const mergedStyles = { ...styles, ...style };
     const { openAnimation, visible, hourValue, minuteValue, secondValue } = this.state;
     const height = modalHeight || HEIGHT;
 
-    const array60 = new Array(60).fill(1);
-    const array24 = new Array(24).fill(1);
+    const secondsArray = new Array(60).fill(1);
+    const minutesArray = new Array(minutesMaxValue + 1).fill(1);
+    const hoursArray = new Array(hoursMaxValue + 1).fill(1);
 
     return (
       <Modal
@@ -221,7 +223,7 @@ class PickerModal extends React.Component<ModalProps, State> {
                         mode="dropdown"
                       >
                         {
-                          array24.map((value, index) => (
+                          hoursArray.map((value, index) => (
                             <Picker.Item key={index.toString()} value={index} label={index.toString()}/>
                           ))
                         }
@@ -241,7 +243,7 @@ class PickerModal extends React.Component<ModalProps, State> {
                         mode="dropdown"
                       >
                         {
-                          array60.map((value, index) => (
+                          minutesArray.map((value, index) => (
                             <Picker.Item key={index.toString()} value={index} label={index.toString()}/>
                           ))
                         }
@@ -261,7 +263,7 @@ class PickerModal extends React.Component<ModalProps, State> {
                         mode="dropdown"
                       >
                         {
-                          array60.map((value, index) => (
+                          secondsArray.map((value, index) => (
                             <Picker.Item key={index.toString()} value={index} label={index.toString()}/>
                           ))
                         }
