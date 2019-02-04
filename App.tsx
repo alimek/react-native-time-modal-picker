@@ -9,7 +9,7 @@ interface State {
 
 export default class App extends React.Component<any, State> {
   state = {
-    value: 1230,
+    value: 5280,
   };
 
   onValueChanged = (value: number): void => {

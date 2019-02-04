@@ -95,22 +95,53 @@ class PickerModal extends React.Component<ModalProps, State> {
 
   onChangeHour = (value: number) => {
     const { minuteValue, secondValue } = this.state;
+    const { enabledMinutes, enabledSeconds } = this.props;
 
-    const newValue = value * 3600 + minuteValue * 60 + secondValue;
+    let newValue = value * 3600;
+
+    if (enabledMinutes) {
+      newValue += minuteValue * 60;
+    }
+
+    if (enabledSeconds) {
+      newValue = secondValue;
+    }
+
     this.setState({ currentValue: newValue, hourValue: value });
   };
 
   onMinuteChanged = (value: number) => {
     const { hourValue, secondValue } = this.state;
+    const { enabledHours, enabledSeconds } = this.props;
 
-    const newValue = hourValue * 3600 + value * 60 + secondValue;
+    let newValue = value * 60;
+
+    if (enabledSeconds) {
+      newValue += secondValue;
+    }
+
+    if (enabledHours) {
+      newValue += hourValue * 3600;
+    }
+
     this.setState({ currentValue: newValue, minuteValue: value });
   };
 
   onSecondChanged = (value: number) => {
     const { hourValue, minuteValue } = this.state;
+    const { enabledHours, enabledMinutes } = this.props;
 
-    const newValue = hourValue * 3600 + minuteValue * 60 + value;
+
+    let newValue = value;
+
+    if (enabledMinutes) {
+      newValue += minuteValue * 60;
+    }
+
+    if (enabledHours) {
+      newValue += hourValue * 3600;
+    }
+
     this.setState({ currentValue: newValue, secondValue: value });
   };
 
