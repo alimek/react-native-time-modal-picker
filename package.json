@@ -1,11 +1,12 @@
 {
   "name": "react-native-time-modal-picker",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "expo": "^29.0.0",
     "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz",
+    "@react-native-community/picker": "^1.3.0"
   },
   "devDependencies": {
     "@types/react": "^16.4.8",

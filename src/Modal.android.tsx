@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Modal, Animated, View, TouchableOpacity, Text, Picker } from 'react-native';
+import { Modal, Animated, View, TouchableOpacity, Text } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 
 import styles, { HEIGHT } from './styles';
 import { ModalProps } from './typings';
